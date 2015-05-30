@@ -84,15 +84,15 @@ def test_mancala():
     """
     
     my_game = SolitaireMancala()
-    print "Testing init - Computed:", my_game, "Expected: [0]"
+    print("Testing init - Computed:", my_game, "Expected: [0]")
     
     config1 = [0, 0, 1, 1, 3, 5, 0]    
     my_game.set_board(config1)   
     
-    print "Testing set_board - Computed:", str(my_game), "Expected:", str([0, 5, 3, 1, 1, 0, 0])
-    print "Testing get_num_seeds - Computed:", my_game.get_num_seeds(1), "Expected:", config1[1]
-    print "Testing get_num_seeds - Computed:", my_game.get_num_seeds(3), "Expected:", config1[3]
-    print "Testing get_num_seeds - Computed:", my_game.get_num_seeds(5), "Expected:", config1[5]
+    print("Testing set_board - Computed:", str(my_game), "Expected:", str([0, 5, 3, 1, 1, 0, 0])
+    print("Testing get_num_seeds - Computed:", my_game.get_num_seeds(1), "Expected:", config1[1])
+    print("Testing get_num_seeds - Computed:", my_game.get_num_seeds(3), "Expected:", config1[3])
+    print("Testing get_num_seeds - Computed:", my_game.get_num_seeds(5), "Expected:", config1[5])
 
     # add more tests here
     
