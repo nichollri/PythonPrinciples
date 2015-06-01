@@ -1,8 +1,6 @@
 """
 Student facing implement of solitaire version of Mancala - Tchoukaillon
-
 Goal: Move as many seeds from given houses into the store
-
 In GUI, you make ask computer AI to make move or click to attempt a legal move
 """
 
@@ -15,7 +13,8 @@ class SolitaireMancala:
         """
         Create Mancala game with empty store and no houses
         """
-        pass
+        self.configuration = [0]
+        
     
     def set_board(self, configuration):
         """
@@ -23,19 +22,26 @@ class SolitaireMancala:
         house zero corresponds to the store and is on right
         houses are number in ascending order from right to left
         """
-        pass
+        my_rev_list = list(configuration)
+        my_rev_list.reverse()
+        self.configuration = my_rev_list
     
     def __str__(self):
         """
         Return string representation for Mancala board
         """
-        return ""
+        my_str =""
+        for seed in self.configuration:
+            my_str += str(seed) + ", "
+        my_str = my_str.rstrip()
+        my_str = my_str.rstrip(',')
+        return my_str
     
     def get_num_seeds(self, house_num):
         """
         Return the number of seeds in given house on board
         """
-        return 0
+        return(self.configuration[house_num])
 
     def is_game_won(self):
         """
@@ -87,9 +93,10 @@ def test_mancala():
     print("Testing init - Computed:", my_game, "Expected: [0]")
     
     config1 = [0, 0, 1, 1, 3, 5, 0]    
-    my_game.set_board(config1)   
+    my_game.set_board(config1)
+    #print(str(my_game))
     
-    print("Testing set_board - Computed:", str(my_game), "Expected:", str([0, 5, 3, 1, 1, 0, 0])
+    print("Testing set_board - Computed:", str(my_game), "Expected:", str([0, 5, 3, 1, 1, 0, 0]))
     print("Testing get_num_seeds - Computed:", my_game.get_num_seeds(1), "Expected:", config1[1])
     print("Testing get_num_seeds - Computed:", my_game.get_num_seeds(3), "Expected:", config1[3])
     print("Testing get_num_seeds - Computed:", my_game.get_num_seeds(5), "Expected:", config1[5])
