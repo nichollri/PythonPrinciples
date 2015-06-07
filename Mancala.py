@@ -23,7 +23,7 @@ class SolitaireMancala:
         houses are number in ascending order from right to left
         """
         my_rev_list = list(configuration)
-        my_rev_list.reverse()
+        # my_rev_list.reverse()
         self.configuration = my_rev_list
     
     def __str__(self):
@@ -31,10 +31,15 @@ class SolitaireMancala:
         Return string representation for Mancala board
         """
         my_str =""
-        for seed in self.configuration:
+	# we print store on right hand side
+	# so reverse the order on the print out
+        my_mancala_board = list(self.configuration)
+        my_mancala_board.reverse()
+        for seed in my_mancala_board:
             my_str += str(seed) + ", "
         my_str = my_str.rstrip()
         my_str = my_str.rstrip(',')
+
         return my_str
     
     def get_num_seeds(self, house_num):
@@ -53,15 +58,33 @@ class SolitaireMancala:
         """
         Check whether a given move is legal
         """
-        return True
-
+	    # get seeds from the given house number
+        # we should have one and only one seed put in last house. 
+        # Since we index the store and houses from right to left 
+        # starting at zero for the store, moving the seeds from a 
+        # particular house is legal exactly when the number of seeds 
+        # in the house matches the house's index.
+        num_seeds_in_house = self.get_num_seeds(house_num)
+        if (num_seeds_in_house == house_num):
+            return True
+        else:
+            return False
     
     def apply_move(self, house_num):
         """
         Move all of the stones from house to lower/left houses
         Last seed must be played in the store (house zero)
         """
-        pass
+        if (self.is_legal_move(house_num)):
+            num_seeds = self.get_num_seeds(house_num)
+            # zero the house which we are taking the seeds from
+            self.configuration[house_num] = 0
+            # apply the seeds to the other houses
+            for seed in range(num_seeds):
+                house_num -= 1
+                self.configuration[house_num] += 1
+        else:
+            print("illegal move")
 
     def choose_move(self):
         """
@@ -102,7 +125,19 @@ def test_mancala():
     print("Testing get_num_seeds - Computed:", my_game.get_num_seeds(5), "Expected:", config1[5])
 
     # add more tests here
+    # only legal move at start with config1 is house_num 5
+    print("Testing legal moves - Computed:", my_game.is_legal_move(5), "Expected:", "True")
+    print("Testing legal moves - Computed:", my_game.is_legal_move(4), "Expected:", "False")
+    print("Testing legal moves - Computed:", my_game.is_legal_move(1), "Expected:", "False")
     
+    # test the play move function, start with only valid play
+    my_game.apply_move(5)
+    print("Testing move, House 5, - Computed;", str(my_game), "Expected:", str([0,0,4,2,2,1,1]))
+    my_game.apply_move(1)
+    print("Testing move, House 1, - Computed;", str(my_game), "Expected:", str([0,0,4,2,2,0,2]))
+    my_game.apply_move(2)
+    print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,4,2,0,1,3]))
+
 test_mancala()
 
 
