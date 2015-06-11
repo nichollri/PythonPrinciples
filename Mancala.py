@@ -58,7 +58,7 @@ class SolitaireMancala:
         """
         Check whether a given move is legal
         """
-	    # get seeds from the given house number
+	# get seeds from the given house number
         # we should have one and only one seed put in last house. 
         # Since we index the store and houses from right to left 
         # starting at zero for the store, moving the seeds from a 
@@ -93,7 +93,15 @@ class SolitaireMancala:
         Note that using a longer legal move would make smaller illegal
         If no legal move, return house zero
         """
-        return 0
+        found_move = False
+        for house_num in range(len(self.configuration)-1):
+            if ((self.is_legal_move(house_num)) and (house_num != 0)):
+                found_move = True
+                return house_num
+        
+        if (found_move == False):
+            return (0)
+        
     
     def plan_moves(self):
         """
@@ -129,12 +137,20 @@ def test_mancala():
     print("Testing legal moves - Computed:", my_game.is_legal_move(5), "Expected:", "True")
     print("Testing legal moves - Computed:", my_game.is_legal_move(4), "Expected:", "False")
     print("Testing legal moves - Computed:", my_game.is_legal_move(1), "Expected:", "False")
-    
+
+    # test that we get the right correct move back
+    house_num_of_move = my_game.choose_move()
+    print("Testing best move - Computed:", str(house_num_of_move), "Expected:", "5")
     # test the play move function, start with only valid play
     my_game.apply_move(5)
     print("Testing move, House 5, - Computed;", str(my_game), "Expected:", str([0,0,4,2,2,1,1]))
+
+    # test that we get the next right move back
+    house_num_of_move = my_game.choose_move()
+    print("Testing best move - Computed:", str(house_num_of_move), "Expected:", "1")
     my_game.apply_move(1)
     print("Testing move, House 1, - Computed;", str(my_game), "Expected:", str([0,0,4,2,2,0,2]))
+    
     my_game.apply_move(2)
     print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,4,2,0,1,3]))
 
