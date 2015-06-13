@@ -52,7 +52,11 @@ class SolitaireMancala:
         """
         Check to see if all houses but house zero are empty
         """
-        return True
+        game_won = True
+        for house_num in range(len(self.configuration)-1):
+            if ((house_num >0) and (self.configuration[house_num] != 0)):
+                game_won = False
+        return(game_won)
     
     def is_legal_move(self, house_num):
         """
@@ -144,16 +148,48 @@ def test_mancala():
     # test the play move function, start with only valid play
     my_game.apply_move(5)
     print("Testing move, House 5, - Computed;", str(my_game), "Expected:", str([0,0,4,2,2,1,1]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
 
     # test that we get the next right move back
     house_num_of_move = my_game.choose_move()
     print("Testing best move - Computed:", str(house_num_of_move), "Expected:", "1")
     my_game.apply_move(1)
     print("Testing move, House 1, - Computed;", str(my_game), "Expected:", str([0,0,4,2,2,0,2]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
     
     my_game.apply_move(2)
     print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,4,2,0,1,3]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
 
+    my_game.apply_move(1)
+    print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,4,2,0,0,4]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
+
+    my_game.apply_move(4)
+    print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,0,3,1,1,5]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
+
+    my_game.apply_move(1)
+    print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,0,3,1,0,6]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
+
+    my_game.apply_move(3)
+    print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,0,0,2,1,7]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
+
+    my_game.apply_move(1)
+    print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,0,0,2,0,8]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
+
+    my_game.apply_move(2)
+    print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,0,0,0,1,9]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "False")
+
+    my_game.apply_move(1)
+    print("Testing move, House 2, - Computed;", str(my_game), "Expected:", str([0,0,0,0,0,0,10]))
+    print("Testing game won functions - Computed:", my_game.is_game_won(), "Expected:", "True")
+    
+    
 test_mancala()
 
 
