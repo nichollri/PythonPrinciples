@@ -4,6 +4,8 @@ Goal: Move as many seeds from given houses into the store
 In GUI, you make ask computer AI to make move or click to attempt a legal move
 """
 
+from tkinter import *
+
 class SolitaireMancala:
     """
     Simple class that implements Solitaire Mancala
@@ -192,6 +194,12 @@ def test_mancala():
     
 test_mancala()
 
+root = Tk()
+
+w = Label(root, text="Hello, world!")
+w.pack()
+
+root.mainloop()
 
 # Import GUI code once you feel your code is correct
 # import poc_mancala_gui
