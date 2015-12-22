@@ -4,6 +4,7 @@ This file contains the sample data
 Why should you learn to write programs?
 
  R100000
+ R100000X R100000T R25X200000Y
 
 Writing programs (or programming) is a very creative
 and rewarding activity.  You can write programs for
